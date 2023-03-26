@@ -22,8 +22,8 @@
 
 ## items table
 
-|Column   |Type  |Options                  |
-|---------|------|-------------------------|
+|Column   |Type  |Options                 |
+|---------|------|------------------------|
 |item_name|string|null:false, unique: true|
 |category |string|null:false, unique: true|
 |situation|string|null:false, unique: true|
@@ -40,8 +40,8 @@
 
 ## purchases table
 
-|Column        |Type  |Options                  |
-|--------------|------|-------------------------|
+|Column        |Type  |Options                 |
+|--------------|------|------------------------|
 |credit        |string|null:false, unique: true|
 |date          |string|null:false, unique: true|
 |code          |string|null:false, unique: true|
