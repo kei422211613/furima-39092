@@ -2,6 +2,7 @@
 
 ## users table
 
+
 |Column               |Type  |Options                  |
 |---------------------|------|-------------------------|
 |nick_name            |string|null:false               |
@@ -13,12 +14,14 @@
 |first_name_kana      |string|null:false               | 
 |birth                |date  |null:false               |
 
+
 ### Association
 
 * has_many :items
 * has_many :purchases
 
 ## items table
+
 
 |Column   |Type  |Options   |
 |---------|------|----------|
@@ -32,6 +35,8 @@
 |item_text|text  |null:false|
 |user_id|references|references :user,  foreign_key: true|
 
+
+
 ### Association
 
 * belongs_to :user
@@ -39,6 +44,7 @@
 * has_one :address
 
 ## purchases table
+
 
 |Column        |Type  |Options                             |
 |--------------|------|------------------------------------|
@@ -63,7 +69,6 @@
 |building_name |string||
 |number        |string|null:false|
 |purchase_id|references|references :purchase,  foreign_key: true|
-
 
 ### Association
 
