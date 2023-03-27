@@ -2,6 +2,7 @@
 
 ## users table
 
+
 |Column               |Type  |Options                  |
 |---------------------|------|-------------------------|
 |nick_name            |string|null:false               |
@@ -13,12 +14,14 @@
 |first_name_kana      |string|null:false               | 
 |birth                |date  |null:false               |
 
+
 ### Association
 
 * has_many :items
 * has_many :purchases
 
 ## items table
+
 
 |Column   |Type  |Options   |
 |---------|------|----------|
@@ -31,12 +34,15 @@
 |price    |string|null:false|
 |item_text|text  |null:false|
 
+
+
 ### Association
 
 * belongs_to :user
 * belongs_to :purchase
 
 ## purchases table
+
 
 |Column        |Type  |Options                             |
 |--------------|------|------------------------------------|
@@ -62,6 +68,3 @@
 |number        |string|null:false|
 
 
-### Association
-
-* belongs_to :purchase
