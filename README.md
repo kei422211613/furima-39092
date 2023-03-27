@@ -23,25 +23,27 @@
 |Column   |Type  |Options   |
 |---------|------|----------|
 |item_name|string|null:false|
-|category |string|null:false|
-|situation|string|null:false|
-|delivery |string|null:false|
-|region   |string|null:false|
-|deadline |string|null:false|
-|price    |string|null:false|
+|category_id |integer|null:false|
+|situation_id|integer|null:false|
+|delivery_fee_payment_id |integer|null:false|
+|region_id   |integer|null:false|
+|deadline_id |integer|null:false|
+|price    |integer|null:false|
 |item_text|text  |null:false|
+|user_id|references|references :user,  foreign_key: true|
 
 ### Association
 
 * belongs_to :user
-* belongs_to :purchase
+* has_one :purchase
+* has_one :address
 
 ## purchases table
 
 |Column        |Type  |Options                             |
 |--------------|------|------------------------------------|
-|user_id       |string|references :user,  foreign_key: true|
-|item_id       |string|references :item,  foreign_key: true|
+|user_id       |references|references :user,  foreign_key: true|
+|item_id       |references|references :item,  foreign_key: true|
 
 
 ### Association
@@ -55,13 +57,15 @@
 |Column        |Type  |Options   |
 |--------------|------|----------|
 |post_code     |string|null:false|
-|prefectures   |string|null:false,references :item, foreign_key: true|
+|region_id   |integer|null:false|
 |municipalities|string|null:false|
 |banchi        |string|null:false|
-|building_name |string|null:false|
+|building_name |string||
 |number        |string|null:false|
+|purchase_id|references|references :purchase,  foreign_key: true|
 
 
 ### Association
 
 * belongs_to :purchase
+* belongs_to :item
