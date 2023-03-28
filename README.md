@@ -2,12 +2,18 @@
 
 ## users table
 
-|Column   |Type  |Options                  |
-|---------|------|-------------------------|
-|nick name|string|null:false               |
-|email    |string|null:false, unique: true |
-|password |string|null:false               |
-|profile  |text  |null:false               |
+
+|Column               |Type  |Options                  |
+|---------------------|------|-------------------------|
+|nick_name            |string|null:false               |
+|email                |string|null:false, unique: true |
+|encrypted_password   |string|null:false               |
+|family_name          |string|null:false               |
+|first_name           |string|null:false               |
+|family_name_kana     |string|null:false               |
+|first_name_kana      |string|null:false               | 
+|birth                |date  |null:false               |
+
 
 ### Association
 
@@ -16,28 +22,53 @@
 
 ## items table
 
-|Column   |Type  |Options                  |
-|---------|------|-------------------------|
-|item name|string|null:false               |
-|category |string|null:false, unique: true |
-|price    |string|null:false               |
-|image    |string|null:false               |
-|seller   |text  |null:false               |
-|comment  |text  |null:false               |
+
+|Column                  |Type      |Options                       |
+|------------------------|----------|------------------------------|
+|item_name               |string    |null:false                    |
+|category_id             |integer   |null:false                    |
+|situation_id            |integer   |null:false                    |
+|delivery_fee_payment_id |integer   |null:false                    |
+|region_id               |integer   |null:false                    |
+|deadline_id             |integer   |null:false                    |
+|price                   |integer   |null:false                    |
+|item_text               |text      |null:false                    |
+|user                    |references|null:false,  foreign_key: true|
+
+
 
 ### Association
 
 * belongs_to :user
-* belongs_to :purchase
+* has_one :purchase
 
 ## purchases table
 
-|Column   |Type  |Options                  |
-|---------|------|-------------------------|
-|buyer    |string|null:false               |
-|address  |string|null:false, unique: true |
+
+|Column|Type      |Options                      |
+|------|----------|-----------------------------|
+|user  |references|null:false, foreign_key: true|
+|item  |references|null:false, foreign_key: true|
+
 
 ### Association
 
 * belongs_to :user
 * belongs_to :item
+* has_one :address
+
+## addresses table
+
+|Column        |Type      |Options                      |
+|--------------|----------|-----------------------------|
+|post_code     |string    |null:false                   |
+|region_id     |integer   |null:false                   |
+|municipalities|string    |null:false                   |
+|banchi        |string    |null:false                   |
+|building_name |string    |                             |
+|number        |string    |null:false                   |
+|purchase      |references|null:false, foreign_key: true|
+
+### Association
+
+* belongs_to :purchase
