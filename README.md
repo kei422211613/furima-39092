@@ -45,10 +45,10 @@
 ## purchases table
 
 
-|Column|Type      |Options          |
-|------|----------|-----------------|
-|user  |references|foreign_key: true|
-|item  |references|foreign_key: true|
+|Column|Type      |Options                      |
+|------|----------|-----------------------------|
+|user  |references|null:false, foreign_key: true|
+|item  |references|null:false, foreign_key: true|
 
 
 ### Association
@@ -59,15 +59,15 @@
 
 ## addresses table
 
-|Column        |Type      |Options          |
-|--------------|----------|-----------------|
-|post_code     |string    |null:false       |
-|region_id     |integer   |null:false       |
-|municipalities|string    |null:false       |
-|banchi        |string    |null:false       |
-|building_name |string    |                 |
-|number        |string    |null:false       |
-|purchase      |references|foreign_key: true|
+|Column        |Type      |Options                      |
+|--------------|----------|-----------------------------|
+|post_code     |string    |null:false                   |
+|region_id     |integer   |null:false                   |
+|municipalities|string    |null:false                   |
+|banchi        |string    |null:false                   |
+|building_name |string    |                             |
+|number        |string    |null:false                   |
+|purchase      |references|null:false, foreign_key: true|
 
 ### Association
 
