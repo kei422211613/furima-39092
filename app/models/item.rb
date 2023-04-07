@@ -6,7 +6,17 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one_attached :image
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category
+  belongs_to :situation
+  belongs_to :delivery_fee_payment
+  belongs_to :region
+  belongs_to :deadline
   
+
+  validates :genre_id, numericality: { other_than: 1 , message: "can't be blank"}
+
   validates :name, presence: true
   validates :description, presence: true
   validates :category, presence: true, inclusion: { in: %w(--- メンズ レディース ベビー・キッズ インテリア・住まい・小物 本・音楽・ゲーム おもちゃ・ホビー・グッズ 家電・スマホ・カメラ スポーツ・レジャー ハンドメイド その他) }
@@ -14,4 +24,11 @@ class Item < ApplicationRecord
   validates :shipping_fee_payer, presence: true, inclusion: { in: %w(--- 着払い(購入者負担) 送料込み(出品者負担) ) }
   validates :shipping_duration, presence: true, inclusion: { in: %w(--- 1~2日で発送 2~3日で発送 4~7日で発送) }
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+
+  validates :item, presence: true, unless: :was_attached?
+
+  def was_attached?
+    self.image.attached?
+  end
+
 end
