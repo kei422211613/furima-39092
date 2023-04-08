@@ -1,9 +1,4 @@
 class Item < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-
   belongs_to :user
   has_one_attached :image
 
@@ -15,7 +10,11 @@ class Item < ApplicationRecord
   belongs_to :deadline
   
 
-  validates :genre_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :situation_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :delivery_fee_payment_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :region_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :deadline_id, numericality: { other_than: 1 , message: "can't be blank"}
 
   validates :name, presence: true
   validates :description, presence: true
