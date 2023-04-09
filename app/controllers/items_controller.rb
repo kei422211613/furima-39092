@@ -1,9 +1,8 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
 
   def index
-    @items = Item.all
-    @item = Item.new
-    @user = User.find_by(id: params[:user_id])
+    @items = Item.includes(:user).order('created_at DESC')
   end
   
   def new
@@ -11,12 +10,20 @@ class ItemsController < ApplicationController
   end
 
   def create
-    Iten.create(item_params)
+    @item = Item.new(item_params)
+    if @item.save
+    redirect_to root_path
+    else
+    render :new
+    end
   end
 
   private
   def item_params
-    params.require(:item).permit(:name, :image, :email, :encrypted_password, :family_name, :first_name, :family_name_kana, :first_name_kana, :birth).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :item_name, :item_text, :category_id, :situation_id, :delivery_fee_payment_id, :region_id, :deadline_id, :price).merge(user_id: current_user.id)
   end
 
+  def set_item
+    @item = Item.find(params[:id])
+  end
 end
