@@ -4,11 +4,11 @@ FactoryBot.define do
     
     item_name { Faker::Name.name }
     item_text { Faker::Lorem.sentence }
-    category_id { Faker::Number.between(from: 1, to: 10) }
-    situation_id { Faker::Number.between(from: 1, to: 6) }
-    delivery_fee_payment_id { Faker::Number.between(from: 1, to: 2) }
-    region_id { Faker::Number.between(from: 1, to: 47) }
-    deadline_id { Faker::Number.between(from: 1, to: 3) }
+    category_id { Faker::Number.between(from: 2, to: 11) }
+    situation_id { Faker::Number.between(from: 2, to: 7) }
+    delivery_fee_payment_id { Faker::Number.between(from: 2, to: 3) }
+    region_id { Faker::Number.between(from: 2, to: 48) }
+    deadline_id { Faker::Number.between(from: 2, to: 4) }
     price { Faker::Number.between(from: 300, to: 9_999_999) }
 
     after(:build) do |item|
