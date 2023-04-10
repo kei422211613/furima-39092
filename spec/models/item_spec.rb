@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
   before do
     @item = FactoryBot.create(:item)
   end
@@ -39,7 +38,7 @@ RSpec.describe Item, type: :model do
 
     context '出品ができないとき' do
       it 'ユーザー登録している人でないと出品できない' do
-        @item.user_id = nil
+        @item.user_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist', "User can't be blank")
       end
@@ -49,19 +48,19 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
       it '商品名が空欄だと出品できない' do
-        @item.item_name = nil
+        @item.item_name = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Name can't be blank")
+        expect(@item.errors.full_messages).to include("Item name can't be blank")
       end
       it '商品の説明が空欄だと出品できない' do
-        @item.item_text = nil
+        @item.item_text = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Description can't be blank")
+        expect(@item.errors.full_messages).to include("Item text can't be blank")
       end
       it 'カテゴリーの情報が「---」だと出品できない' do
-        @item.category_id = 0
+        @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Category must be other than 0')
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
       it 'カテゴリーの情報が空欄だと出品できない' do
         @item.category_id = nil
@@ -71,42 +70,42 @@ RSpec.describe Item, type: :model do
       it '商品の状態の情報が「---」だと出品できない' do
         @item.situation_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Item status must be other than 0')
+        expect(@item.errors.full_messages).to include('Situation must be other than 1')
       end
       it '商品の状態の情報が空欄だと出品できない' do
         @item.situation_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item status can't be blank", 'Item status is not a number')
+        expect(@item.errors.full_messages).to include("Situation can't be blank", 'Situation is not a number')
       end
       it '配送料の負担の情報が「---」だと出品できない' do
         @item.delivery_fee_payment_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Shipping cost must be other than 0')
+        expect(@item.errors.full_messages).to include('Delivery fee payment must be other than 1')
       end
       it '配送料の負担の情報が空欄だと出品できない' do
         @item.delivery_fee_payment = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping cost can't be blank", 'Shipping cost is not a number')
+        expect(@item.errors.full_messages).to include("Delivery fee payment can't be blank", 'Delivery fee payment is not a number')
       end
       it '発送元の地域の情報が「---」だと出品できない' do
         @item.region_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Prefecture must be other than 0')
+        expect(@item.errors.full_messages).to include('Region must be other than 1')
       end
       it '発送元の地域の情報が空欄だと出品できない' do
         @item.region_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture can't be blank", 'Prefecture is not a number')
+        expect(@item.errors.full_messages).to include("Region can't be blank", 'Region is not a number')
       end
       it '発送までの日数の情報が「---」だと出品できない' do
         @item.deadline_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Shipping date must be other than 0')
+        expect(@item.errors.full_messages).to include('Deadline must be other than 1')
       end
       it '発送までの日数の情報が空欄だと出品できない' do
         @item.deadline_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping date can't be blank", 'Shipping date is not a number')
+        expect(@item.errors.full_messages).to include("Deadline can't be blank", 'Deadline is not a number')
       end
       it '価格が空欄だと出品できない' do
         @item.price = nil
