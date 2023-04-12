@@ -18,7 +18,7 @@
 ### Association
 
 * has_many :items
-* has_many :purchases
+* has_many :orders
 
 ## items table
 
@@ -40,9 +40,9 @@
 ### Association
 
 * belongs_to :user
-* has_one :purchase
+* has_one :order
 
-## purchases table
+## orders table
 
 
 |Column|Type      |Options                      |
@@ -71,4 +71,4 @@
 
 ### Association
 
-* belongs_to :purchase
+* belongs_to :order
