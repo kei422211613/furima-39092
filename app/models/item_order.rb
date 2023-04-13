@@ -1,6 +1,6 @@
 class ItemOrder
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :post_code, :region_id, :municipalities, :banchi, :building_name, :number
+  attr_accessor :user_id, :item_id, :post_code, :region_id, :municipalities, :banchi, :building_name, :number, :token
 
     validates :user_id, presence: true
     validates :item_id, presence: true
@@ -10,6 +10,8 @@ class ItemOrder
     validates :municipalities, presence: true
     validates :banchi, presence: true
     validates :number, presence: true, format: { with: /\A\d{10,11}\z/, message: 'is invalid' }
+
+    validates :token, presence: true
 
   def save
     order = Order.create(user_id: user_id, item_id: item_id)
