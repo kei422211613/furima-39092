@@ -95,6 +95,11 @@ RSpec.describe ItemOrder, type: :model do
         @item_order.valid?
         expect(@item_order.errors.full_messages).to include('Number is invalid')
       end
+      it 'トークンが空だと保存できないこと' do
+        @item_order.token = nil
+        @item_order.valid?
+        expect(@item_order.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end

@@ -8,5 +8,6 @@ FactoryBot.define do
     banchi     {'1-1-1'}
     building_name  {'建物ビル'}
     number   {'09022223333'} 
+    token { Faker::Internet.password(min_length: 20, max_length: 30) }
   end
 end
