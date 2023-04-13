@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe ItemOrder, type: :model do
   before do
-    @item_order= FactoryBot.build(:item_order)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @item_order = FactoryBot.build(:item_order, user_id: user.id, item_id: item.id)
   end
 
   describe '配送先情報の保存' do
@@ -70,6 +72,11 @@ RSpec.describe ItemOrder, type: :model do
         @item_order.valid?
         expect(@item_order.errors.full_messages).to include("Region can't be blank")
       end
+      it '都道府県が「---」だと保存できないこと' do
+        @item_order.region_id = 0
+        @item_order.valid?
+        expect(@item_order.errors.full_messages).to include("Region can't be blank")
+      end
       it '市区町村が空だと保存できないこと' do
         @item_order.municipalities = nil
         @item_order.valid?
@@ -87,6 +94,11 @@ RSpec.describe ItemOrder, type: :model do
       end
       it '電話番号にハイフンがあると保存できないこと' do
         @item_order.number = '123 - 1234 - 1234'
+        @item_order.valid?
+        expect(@item_order.errors.full_messages).to include('Number is invalid')
+      end
+      it '電話番号が9桁以下では保存できない' do
+        @item_order.number = 12_345_678_9
         @item_order.valid?
         expect(@item_order.errors.full_messages).to include('Number is invalid')
       end
