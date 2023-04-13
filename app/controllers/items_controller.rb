@@ -12,7 +12,8 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless user_signed_in? && current_user.id == @item.user_id
+    if @item.user_id == current_user.id && @item.order.nil?
+    else
       redirect_to root_path
     end
   end
@@ -22,7 +23,7 @@ class ItemsController < ApplicationController
     if @item.valid?
       redirect_to item_path(item_params)
     else
-      render 'edit'
+      render edit
     end
   end
 
@@ -31,7 +32,8 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    if @item.save
+    if @item.valid?
+      @item.save
       redirect_to root_path
     else
       render :new
