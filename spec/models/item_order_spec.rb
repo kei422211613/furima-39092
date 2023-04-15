@@ -65,7 +65,7 @@ RSpec.describe ItemOrder, type: :model do
       it '郵便番号にハイフンがないと保存できないこと' do
         @item_order.post_code = 1_234_567
         @item_order.valid?
-        expect(@item_order.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
+        expect(@item_order.errors.full_messages).to include('Post code is invalid')
       end
       it '都道府県が空だと保存できないこと' do
         @item_order.region_id = nil
@@ -73,9 +73,9 @@ RSpec.describe ItemOrder, type: :model do
         expect(@item_order.errors.full_messages).to include("Region can't be blank")
       end
       it '都道府県が「---」だと保存できないこと' do
-        @item_order.region_id = 0
+        @item_order.region_id = 1
         @item_order.valid?
-        expect(@item_order.errors.full_messages).to include("Region can't be blank")
+        expect(@item_order.errors.full_messages).to include("Region must be other than 1")
       end
       it '市区町村が空だと保存できないこと' do
         @item_order.municipalities = nil
