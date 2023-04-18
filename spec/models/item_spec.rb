@@ -113,9 +113,9 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it '価格に半角数字以外が含まれている場合は出品できない' do
-        @item.price = "1000円"
+        @item.price = '1000円'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '価格の範囲が、300円未満だと出品できない' do
         @item.price = 100

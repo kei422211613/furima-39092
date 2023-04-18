@@ -75,7 +75,7 @@ RSpec.describe ItemOrder, type: :model do
       it '都道府県が「---」だと保存できないこと' do
         @item_order.region_id = 1
         @item_order.valid?
-        expect(@item_order.errors.full_messages).to include("Region must be other than 1")
+        expect(@item_order.errors.full_messages).to include('Region must be other than 1')
       end
       it '市区町村が空だと保存できないこと' do
         @item_order.municipalities = nil
@@ -90,7 +90,7 @@ RSpec.describe ItemOrder, type: :model do
       it '電話番号が空だと保存できないこと' do
         @item_order.number = nil
         @item_order.valid?
-        expect(@item_order.errors.full_messages).to include("Number is invalid")
+        expect(@item_order.errors.full_messages).to include('Number is invalid')
       end
       it '電話番号にハイフンがあると保存できないこと' do
         @item_order.number = '123 - 1234 - 1234'

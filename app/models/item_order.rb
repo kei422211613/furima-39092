@@ -5,15 +5,15 @@ class ItemOrder
   with_options presence: true do
     validates :user_id, :item_id, :municipalities, :token
 
-    validates :post_code, format: { with: /\A\d{3}-\d{4}\z/}
-    validates :region_id, numericality: { other_than: 1}
+    validates :post_code, format: { with: /\A\d{3}-\d{4}\z/ }
+    validates :region_id, numericality: { other_than: 1 }
     validates :banchi
-    validates :number, format: { with: /\A\d{10,11}\z/}
-
+    validates :number, format: { with: /\A\d{10,11}\z/ }
   end
   def save
     order = Order.create(user_id: user_id, item_id: item_id)
 
-    Address.create(order_id: order.id, post_code: post_code, region_id: region_id, municipalities: municipalities, banchi: banchi, building_name: building_name, number: number)
+    Address.create(order_id: order.id, post_code: post_code, region_id: region_id, municipalities: municipalities,
+                   banchi: banchi, building_name: building_name, number: number)
   end
 end
