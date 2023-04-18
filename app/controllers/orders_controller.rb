@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   def index
     @item_order = ItemOrder.new
-    if user_signed_in? && current_user.id != @item.user_id && @item.order.nil?
+    if user_signed_in? && current_user.id != @item.user_id && @item.order == nil
       @item_order = ItemOrder.new
     else
       redirect_to root_path
@@ -25,9 +25,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:item_order).permit(:post_code, :region_id, :municipalities, :banchi, :building_name, :number).merge(
-      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
-    )
+    params.require(:item_order).permit(:post_code, :region_id, :municipalities, :banchi, :building_name, :number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def set_item
